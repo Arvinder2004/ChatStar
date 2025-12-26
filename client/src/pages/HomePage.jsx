@@ -1,22 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Sidebar from "../components/Sidebar";
 import ChatContainer from "../components/ChatContainer";
 import RightSidebar from "../components/RightSidebar";
 import { ChatContext } from "../../context/ChatContext";
 
 const HomePage = () => {
-  const {selectedUser} = useContext(ChatContext)
+  const { selectedUser } = useContext(ChatContext);
 
   return (
-    <div className="border w-full h-screen sm:px-[15%] sm:py-[5%]">
-      <div
-        className={`backdrop-blur-xl border-2 border-gray-600 rounded-2xl overflow-hidden h-[100%] grid grid-cols-1 relative ${
-          selectedUser ? "md:grid-cols-[1fr_1.5fr_1fr] xl:grid-cols-[1fr_2fr_1fr]" : "md:grid-cols-2"
-        }`}
-      >
-        <Sidebar />
-        <ChatContainer />
-        <RightSidebar />
+
+    <div className="w-full h-screen bg-[#111b21] overflow-hidden">
+      <div className="w-full h-full flex">
+        
+        <div className={`w-full md:w-[350px] lg:w-[400px] border-r border-[#2f3b43] h-full ${selectedUser ? "hidden md:block" : "block"}`}>
+          <Sidebar />
+        </div>
+
+    
+        <div className={`flex-1 h-full bg-[#0b141a] relative ${!selectedUser ? "hidden md:flex" : "flex"}`}>
+            <ChatContainer />
+        </div>
+
+        {selectedUser && (
+          <div className="hidden xl:block w-[350px] border-l border-[#2f3b43] h-full bg-[#111b21]">
+             <RightSidebar />
+          </div>
+        )}
       </div>
     </div>
   );
