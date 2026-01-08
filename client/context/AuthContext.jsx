@@ -32,8 +32,7 @@ export const AuthProvider = ({ children }) => {
     // login function to handle user authentication and socket connection
 
     const login = async (state, credentials) => {
-        try {
-            
+        try { 
             const { data } = await axios.post(`/api/auth/${state}`, credentials)
             
             if (data.success) {
@@ -48,11 +47,9 @@ export const AuthProvider = ({ children }) => {
                 toast.error(data.message)
             }
 
-
         } catch (error) {
             toast.error(error.message)
         }
-
     }
 
     // Logout function to handle user logout and socket disconnect
@@ -82,11 +79,7 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             toast.error(error.message)
         }
-
-
     }
-
-
     
     // Connect socket function
     const connectSocket = (userData) => {
@@ -97,7 +90,6 @@ export const AuthProvider = ({ children }) => {
         const newSocket = io(backendUrl, {
             query: {
                 userId: userData._id,
-
             }
         })
         newSocket.connect()
@@ -108,8 +100,6 @@ export const AuthProvider = ({ children }) => {
         })
 
     }
-
-
     
     useEffect(() => {
         if (token) {
